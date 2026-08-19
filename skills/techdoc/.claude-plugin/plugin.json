@@ -1,0 +1,6 @@
+{
+  "name": "techdoc",
+  "version": "0.1.0",
+  "description": "Rewrite a draft into the technical documentation register: name the kind of page, lead with what it is and who it is for, make every step verifiable, document the failure path, and strip the structural tells of generated prose",
+  "author": { "name": "Aleksandr Petrov" }
+}

@@ -18,6 +18,12 @@
       "description": "Verify a finished result against a standard using a fresh sub-agent with context isolation, so it judges the artifact rather than the reasoning that produced it",
       "source": "./skills/verify",
       "category": "development"
+    },
+    {
+      "name": "techdoc",
+      "description": "Rewrite a draft into the technical documentation register: name the kind of page, lead with what it is and who it is for, make every step verifiable, document the failure path, and strip the structural tells of generated prose",
+      "source": "./skills/techdoc",
+      "category": "productivity"
     }
   ]
 }

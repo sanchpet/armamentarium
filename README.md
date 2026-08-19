@@ -10,6 +10,7 @@ The private counterpart, `armamentarium-privatum`, holds the plugins that cannot
 /plugin marketplace add sanchpet/armamentarium
 /plugin install think@armamentarium
 /plugin install verify@armamentarium
+/plugin install techdoc@armamentarium
 ```
 
 ## Plugins
@@ -18,6 +19,7 @@ The private counterpart, `armamentarium-privatum`, holds the plugins that cannot
 |---|---|
 | `think` | Structured reasoning through the ADI cycle: abduction, deduction, induction, audit, decide. For decisions with more than one plausible answer, where the risk is anchoring on the first idea. |
 | `verify` | Runs a fresh sub-agent against a finished artifact with context isolation, so it judges the result rather than the reasoning that produced it. Types: `code`, `chain`, `adversarial`. |
+| `techdoc` | Rewrites a draft into the technical documentation register: names which of the four kinds of page it is, leads with what the page is and who it is for, makes every step verifiable, documents the failure path. Owns the prose, not the house template — a template-driven pass runs after it. |
 
 ## Layout
 
