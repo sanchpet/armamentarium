@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "armamentarium",
+  "description": "Public half of the owner's Claude Code armamentarium: reasoning and verification skills that carry no personal data and work in any repository",
+  "owner": {
+    "name": "Aleksandr Petrov",
+    "email": "27alpetr@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "think",
+      "description": "Structured reasoning through the ADI cycle (abduction, deduction, induction, audit, decide) for decisions with more than one plausible answer",
+      "source": "./skills/think",
+      "category": "productivity"
+    },
+    {
+      "name": "verify",
+      "description": "Verify a finished result against a standard using a fresh sub-agent with context isolation, so it judges the artifact rather than the reasoning that produced it",
+      "source": "./skills/verify",
+      "category": "development"
+    }
+  ]
+}

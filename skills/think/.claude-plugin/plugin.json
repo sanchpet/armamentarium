@@ -1,0 +1,6 @@
+{
+  "name": "think",
+  "version": "0.1.0",
+  "description": "Structured reasoning through the ADI cycle (abduction, deduction, induction, audit, decide) for decisions with more than one plausible answer",
+  "author": { "name": "Aleksandr Petrov" }
+}

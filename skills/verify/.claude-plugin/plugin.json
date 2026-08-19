@@ -1,0 +1,6 @@
+{
+  "name": "verify",
+  "version": "0.1.0",
+  "description": "Verify a finished result against a standard using a fresh sub-agent with context isolation, so it judges the artifact rather than the reasoning that produced it",
+  "author": { "name": "Aleksandr Petrov" }
+}
