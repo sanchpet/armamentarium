@@ -1,0 +1,6 @@
+{
+  "name": "fleet",
+  "version": "0.1.0",
+  "description": "Roles and reporting discipline for a fleet of coordinating Claude Code sessions: a lead that only coordinates, a project lead that owns one project's task list, and an IC that returns evidence rather than a verdict",
+  "author": { "name": "Aleksandr Petrov" }
+}

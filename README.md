@@ -11,6 +11,7 @@ The private counterpart, `armamentarium-privatum`, holds the plugins that cannot
 /plugin install think@armamentarium
 /plugin install verify@armamentarium
 /plugin install techdoc@armamentarium
+/plugin install fleet@armamentarium
 ```
 
 ## Plugins
@@ -20,10 +21,11 @@ The private counterpart, `armamentarium-privatum`, holds the plugins that cannot
 | `think` | Structured reasoning through the ADI cycle: abduction, deduction, induction, audit, decide. For decisions with more than one plausible answer, where the risk is anchoring on the first idea. |
 | `verify` | Runs a fresh sub-agent against a finished artifact with context isolation, so it judges the result rather than the reasoning that produced it. Types: `code`, `chain`, `adversarial`. |
 | `techdoc` | Rewrites a draft into the technical documentation register: names which of the four kinds of page it is, leads with what the page is and who it is for, makes every step verifiable, documents the failure path. Owns the prose, not the house template — a template-driven pass runs after it. |
+| `fleet` | Roles and one reporting discipline for a fleet of coordinating sessions: a lead that only coordinates, a project lead that owns one project's task list, an IC that returns evidence rather than a verdict. Carries the shape of the hierarchy, which is not one team — a teammate cannot spawn teammates, so each level with workers of its own is its own session. Specialisation comes from the spawn prompt and a narrower tool allowlist, not from a fourth role file. |
 
 ## Layout
 
-Plugins are grouped by their primary component type. A plugin is a directory with `.claude-plugin/plugin.json` and its content next to it: `skills/<skill>/SKILL.md` for skills, `hooks/hooks.json` plus `scripts/` for hooks. The registry is `.claude-plugin/marketplace.json`.
+Plugins are grouped by their primary component type: `skills/`, `hooks/`, `mcp/`, `agents/`. A plugin is a directory with `.claude-plugin/plugin.json` and its content next to it: `skills/<skill>/SKILL.md` for skills, `hooks/hooks.json` plus `scripts/` for hooks. The registry is `.claude-plugin/marketplace.json`.
 
 Adding one: create the directory, write `plugin.json`, write the content, register it in `marketplace.json`, add a row above.
 
