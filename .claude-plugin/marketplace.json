@@ -24,6 +24,12 @@
       "description": "Rewrite a draft into the technical documentation register: name the kind of page, lead with what it is and who it is for, make every step verifiable, document the failure path, and strip the structural tells of generated prose",
       "source": "./skills/techdoc",
       "category": "productivity"
+    },
+    {
+      "name": "fleet",
+      "description": "Roles and reporting discipline for a fleet of coordinating Claude Code sessions: a lead that only coordinates, a project lead that owns one project's task list, and an IC that returns evidence rather than a verdict",
+      "source": "./agents/fleet",
+      "category": "productivity"
     }
   ]
 }
