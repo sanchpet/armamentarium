@@ -25,4 +25,4 @@ A plugin belongs here only if all three hold:
 
 - All content in English.
 - Branch and PR from the first change; no committing straight to `main`.
-- Commits carry `--signoff` and `Assisted-By: Claude <noreply@anthropic.com>`.
+- Commits carry `--signoff`.
