@@ -18,6 +18,7 @@ The private counterpart, `armamentarium-privatum`, holds the plugins that cannot
 | Plugin | What it does |
 |---|---|
 | `think` | Structured reasoning through the ADI cycle: abduction, deduction, induction, audit, decide. For decisions with more than one plausible answer, where the risk is anchoring on the first idea. |
+| `dialectic` | The blind solver and discriminator method for a decision that is not obvious: a fresh solver gets the task without your options, a discriminator checks both positions against the code and the measurements, and the answer is a synthesis of which both are special cases. For a responsible decision, role agents then try to refute the synthesis. |
 | `verify` | Runs a fresh sub-agent against a finished artifact with context isolation, so it judges the result rather than the reasoning that produced it. Types: `code`, `chain`, `adversarial`. |
 | `techdoc` | Rewrites a draft into the technical documentation register: names which of the four kinds of page it is, leads with what the page is and who it is for, makes every step verifiable, documents the failure path. Owns the prose, not the house template — a template-driven pass runs after it. |
 

@@ -14,6 +14,12 @@
       "category": "productivity"
     },
     {
+      "name": "dialectic",
+      "description": "The blind solver and discriminator method: a fresh solver gets the task without your options, a discriminator checks both positions against the code and the measurements, and the answer is a synthesis of which both are special cases; role agents refute a responsible decision",
+      "source": "./skills/dialectic",
+      "category": "productivity"
+    },
+    {
       "name": "verify",
       "description": "Verify a finished result against a standard using a fresh sub-agent with context isolation, so it judges the artifact rather than the reasoning that produced it",
       "source": "./skills/verify",
