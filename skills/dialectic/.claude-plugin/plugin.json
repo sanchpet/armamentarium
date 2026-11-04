@@ -1,0 +1,6 @@
+{
+  "name": "dialectic",
+  "version": "0.1.0",
+  "description": "The blind solver and discriminator method: a fresh solver gets the task without your options, a discriminator checks both positions against the code and the measurements, and the answer is a synthesis of which both are special cases; role agents refute a responsible decision",
+  "author": { "name": "Aleksandr Petrov" }
+}
