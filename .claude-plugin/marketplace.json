@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "armamentarium",
-  "description": "Public half of the owner's Claude Code armamentarium: reasoning and verification skills that carry no personal data and work in any repository",
+  "description": "The owner's agentic toolset in one place: own reasoning and verification skills, plus open-source plugins referenced upstream at a pinned commit",
   "owner": {
     "name": "Aleksandr Petrov",
     "email": "27alpetr@gmail.com"
@@ -30,6 +30,31 @@
       "description": "Rewrite a draft into the technical documentation register: name the kind of page, lead with what it is and who it is for, make every step verifiable, document the failure path, and strip the structural tells of generated prose",
       "source": "./skills/techdoc",
       "category": "productivity"
+    },
+    {
+      "name": "modern-web-guidance",
+      "description": "Keep your coding agent up to date with the latest web best practices",
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance",
+        "ref": "v1.0.0",
+        "sha": "4dd968349e54ca45a05dd5c818fb035c9054b022"
+      },
+      "category": "development",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "codex",
+      "description": "Use Codex from Claude Code to review code or delegate tasks.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/openai/codex-plugin-cc.git",
+        "path": "plugins/codex",
+        "ref": "v1.0.6",
+        "sha": "db52e28f4d9ded852ab3942cea316258ae4ef346"
+      },
+      "category": "development",
+      "license": "Apache-2.0"
     }
   ]
 }
