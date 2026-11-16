@@ -1,0 +1,39 @@
+name: bump-upstream
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Move pins to the newest upstream tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/bump-upstream.py "$RUNNER_TEMP/body.md"
+
+      - name: Open or refresh the bump PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if git diff --quiet; then exit 0; fi
+          branch=bump/upstream-plugins
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          git commit --signoff -am "chore(upstream): move plugin pins to the newest tags"
+          git push --force origin "$branch"
+          if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
+            gh pr edit "$branch" --body-file "$RUNNER_TEMP/body.md"
+          else
+            gh pr create --head "$branch" --title "chore(upstream): move plugin pins to the newest tags" \
+              --body-file "$RUNNER_TEMP/body.md"
+          fi
