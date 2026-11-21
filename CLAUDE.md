@@ -24,7 +24,7 @@ An own plugin belongs here only if all three hold:
 ## Adding an upstream plugin
 
 1. Read it before adding: the `description` of every skill (it decides when the skill fires), hooks, MCP servers, agents, and anything it fetches or runs at run time. It needs a license.
-2. Register it in `marketplace.json` by reference, never by copying files: `{"source": "github", "repo", "ref", "sha"}` when the plugin is the repository root, `{"source": "git-subdir", "url", "path", "ref", "sha"}` when it sits in a subdirectory. `ref` is a tag, `sha` the commit it points to; the bump script tracks tags.
+2. Register it in `marketplace.json` by reference, never by copying files: `{"source": "github", "repo", "ref", "sha"}` when the plugin is the repository root, `{"source": "git-subdir", "url", "path", "ref", "sha"}` when it sits in a subdirectory. `ref` is a tag, `sha` the commit it points to; the bump script follows the tags that share the pinned one's prefix.
 3. Take `description` from the upstream `plugin.json` verbatim and set `license`.
 4. Add a row to the README's upstream table, including what it runs outside the pin.
 5. Prove it installs into a throwaway config dir (see Validation in the README).
