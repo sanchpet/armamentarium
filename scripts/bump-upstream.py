@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Move each upstream plugin's pin to its newest tag and describe what changed.
+"""Move each upstream plugin's pin to the newest tag of its series and describe what changed.
 
 Rewrites .claude-plugin/marketplace.json in place and writes the PR body to the
 path given as the first argument. Exits 0 with no file written when every pin
@@ -9,24 +9,40 @@ import json
 import os
 import re
 import sys
-import urllib.error
 import urllib.request
 
 MARKETPLACE = ".claude-plugin/marketplace.json"
+# A tag is a prefix and a dotted version: "v1.0.6", "skill-v4.10.0".
+VERSION = re.compile(r"^(.*?)(\d+(?:\.\d+)*)$")
 # Files that run code or change when the agent acts: the review gate is about these.
 EXECUTABLE = re.compile(r"(^|/)(SKILL\.md|hooks/|\.mcp\.json|agents/|scripts/|commands/|plugin\.json)")
 
 
-def api(path):
+def request(url):
     req = urllib.request.Request(
-        f"https://api.github.com/{path}",
+        url,
         headers={
             "Accept": "application/vnd.github+json",
             "Authorization": f"Bearer {os.environ['GITHUB_TOKEN']}",
         },
     )
     with urllib.request.urlopen(req, timeout=30) as resp:
-        return json.load(resp)
+        return json.load(resp), resp.headers.get("Link", "")
+
+
+def api(path):
+    return request(f"https://api.github.com/{path}")[0]
+
+
+def api_list(path):
+    """Every item of a list endpoint, following the Link header to the last page."""
+    items, url = [], f"https://api.github.com/{path}"
+    while url:
+        page, link = request(url)
+        items += page
+        following = re.search(r'<([^>]+)>; rel="next"', link)
+        url = following.group(1) if following else None
+    return items
 
 
 def repo_of(source):
@@ -38,14 +54,24 @@ def repo_of(source):
     return match.group(1)
 
 
-def newest_tag(repo):
-    try:
-        return api(f"repos/{repo}/releases/latest")["tag_name"]
-    except urllib.error.HTTPError as err:
-        if err.code != 404:
-            raise
-    tags = api(f"repos/{repo}/tags?per_page=1")
-    return tags[0]["name"] if tags else None
+def newest_tag(repo, pinned):
+    """The highest version among the tags that share the pinned tag's prefix.
+
+    One repository may release several things under prefixed tags
+    (skill-v4.10.0 next to engine-v0.1.28), so its latest release can be the
+    wrong series. A pin that does not end in a version is left alone.
+    """
+    match = VERSION.match(pinned)
+    if not match:
+        return None
+    prefix = match.group(1)
+    versions = {}
+    for ref in api_list(f"repos/{repo}/git/matching-refs/tags/{prefix}"):
+        tag = ref["ref"].removeprefix("refs/tags/")
+        found = VERSION.match(tag)
+        if found and found.group(1) == prefix:
+            versions[tuple(int(n) for n in found.group(2).split("."))] = tag
+    return versions[max(versions)] if versions else None
 
 
 def main(body_path):
@@ -58,7 +84,7 @@ def main(body_path):
         if isinstance(source, str) or "ref" not in source:
             continue
         repo = repo_of(source)
-        tag = newest_tag(repo)
+        tag = newest_tag(repo, source["ref"])
         if tag is None or tag == source["ref"]:
             continue
         sha = api(f"repos/{repo}/commits/{tag}")["sha"]

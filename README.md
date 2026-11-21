@@ -28,12 +28,13 @@ Referenced, not copied: `marketplace.json` names the upstream repository, the ta
 |---|---|---|---|
 | `modern-web-guidance` | [GoogleChrome/modern-web-guidance](https://github.com/GoogleChrome/modern-web-guidance) | `v1.0.0` | Yes: every search runs `npx modern-web-guidance@latest`, the newest npm release, whatever the pin. |
 | `codex` | [openai/codex-plugin-cc](https://github.com/openai/codex-plugin-cc) (`plugins/codex`) | `v1.0.6` | Hooks on session start, end and stop run its bundled scripts; the scripts are pinned, the Codex CLI they call is not. |
+| `impeccable` | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (`plugin`) | `skill-v4.10.0` | Hooks on session start, every `Edit`/`Write` and stop run its launcher, which downloads the engine binary from the upstream releases on first use; the binary's sha256 is in the pinned files, so it is covered by the pin. Not covered: live mode's Apply can start the `codex` or `claude` CLI with permission checks off unless `IMPECCABLE_LIVE_COPY_AGENT=chat` is set. |
 
 The last column is where the pin stops protecting: a plugin that fetches or calls code at run time executes whatever that code is today.
 
 ### Updates
 
-`bump-upstream` runs every Monday (and on demand). For each upstream plugin it finds the newest tag, moves the pin, and opens one PR listing, per plugin, the compare link and the changed files that run code or steer the agent (`SKILL.md`, hooks, MCP, agents, commands, scripts). Merging the PR is the update; nothing reaches the agent before that.
+`bump-upstream` runs every Monday (and on demand). For each upstream plugin it finds the newest tag in the series of the pinned one (`skill-v4.10.0` follows `skill-v*`, not the repository's `engine-v*` releases), moves the pin, and opens one PR listing, per plugin, the compare link and the changed files that run code or steer the agent (`SKILL.md`, hooks, MCP, agents, commands, scripts). Merging the PR is the update; nothing reaches the agent before that.
 
 Repository setting it relies on: Actions may create pull requests.
 
@@ -43,4 +44,4 @@ Own plugins are grouped by their primary component type. A plugin is a directory
 
 ## Validation
 
-`claude plugin validate .` at the root checks manifests and `source` syntax; the per-plugin form also parses frontmatter. Neither checks that a `source` resolves, so a renamed directory or a moved upstream path is caught only by installing: `CLAUDE_CONFIG_DIR=$(mktemp -d) claude plugin marketplace add . && claude plugin install <plugin>@armamentarium`.
+`claude plugin validate .` at the root checks manifests and `source` syntax; the per-plugin form also parses frontmatter. Neither checks that a `source` resolves, so a renamed directory or a moved upstream path is caught only by installing: `CLAUDE_CONFIG_DIR=$(mktemp -d) claude plugin marketplace add ./ && claude plugin install <plugin>@armamentarium`.
