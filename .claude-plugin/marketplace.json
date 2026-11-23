@@ -37,8 +37,8 @@
       "source": {
         "source": "github",
         "repo": "GoogleChrome/modern-web-guidance",
-        "ref": "v1.0.0",
-        "sha": "4dd968349e54ca45a05dd5c818fb035c9054b022"
+        "ref": "v1.0.2",
+        "sha": "2b4aa13a72dd47cd135b06ce5abfccd92e19b24f"
       },
       "category": "development",
       "license": "Apache-2.0"
